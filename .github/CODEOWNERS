@@ -1,0 +1,3 @@
+# Reviewer teams requested automatically on pull requests. The last matching
+# pattern wins.
+*    @chord-observatory/code-owners

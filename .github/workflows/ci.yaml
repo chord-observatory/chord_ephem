@@ -1,0 +1,75 @@
+name: ci
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff format --check .
+      - run: ruff check .
+
+  pr-title:
+    # The PR title becomes the squash-merge commit message and the release
+    # notes entry, so check that it follows the conventional commit format.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed by setuptools-git-versioning
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libopenmpi-dev openmpi-bin libhdf5-serial-dev
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # If the package depends on a private repository, give the job read access
+      # to it first, e.g. with a deploy key stored as an organisation secret:
+      # - uses: webfactory/ssh-agent@v0.9.0
+      #   with:
+      #     ssh-private-key: ${{ secrets.CHORD_READ_KEY }}
+      - name: Install
+        run: pip install .[test]
+      - name: Tests
+        run: python -m pytest
+      - name: Tests under MPI
+        run: mpirun --oversubscribe -np 3 python -m pytest --with-mpi
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libopenmpi-dev openmpi-bin libhdf5-serial-dev
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install .[docs]
+      - name: Build the docs, failing on warnings
+        run: sphinx-build -W -b html doc/ doc/_build/html

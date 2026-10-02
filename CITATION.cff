@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: chord_ephem
+message: >-
+  If you use this software, please cite it using the metadata from this file.
+type: software
+repository-code: "https://github.com/chord-observatory/chord_ephem"
+abstract: >-
+  Ephemeris routines for CHORD: observers for the CHORD instruments, local and
+  sidereal time conversions, and radio source catalogues.
+license: MIT
+authors:
+  - name: "The CHORD Collaboration"
