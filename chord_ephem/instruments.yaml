@@ -1,0 +1,31 @@
+---
+# This is a mapping containing CHORD instrument positions and geometry.
+#
+# Required:
+# * latitude:  North latitude in degrees
+# * longitude: East longitude in degrees
+# * altitude:  height above mean sea level in metres
+# * timezone:  IANA name of the local time zone
+
+# Malformed records are ignored with a warning.
+
+# CHORD at DRAO
+#
+# Latitude and longitude are the origin of the array used by the X-engine
+# (`telescope.origin_itrs_lat_deg` and `telescope.origin_itrs_lon_deg` in the
+# kotekan config of any acquisition). This is slightly different form CHIME.
+# The local Earth rotation angle written to the X-engine files (`bin_*_ERAL_deg`) agrees with the local
+# stellar angle computed from this position to 0.0006 degrees.
+
+# TODO: the altitude is CHIME's (from ch_ephem) until the CHORD array is
+# surveyed. It does not affect sidereal times.
+chord:
+  latitude: 49.32075144444
+  longitude: -119.62081125
+  altitude: 555.372
+  timezone: America/Vancouver
+  rotation: 0  
+  offset:
+    x: 0
+    y: 0
+    z: 0
