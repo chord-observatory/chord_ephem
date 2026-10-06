@@ -15,8 +15,6 @@ Constants
     :class:`skyfield.starlib.Star` representing Cygnus A.
 :const:`TauA`
     :class:`skyfield.starlib.Star` representing Taurus A.
-:const:`VirA`
-    :class:`skyfield.starlib.Star` representing Virgo A.
 
 Functions
 =========
@@ -71,8 +69,8 @@ source_dictionary = get_source_dictionary(
     "hfb_target_list",
 )
 
-# Calibrators
+# Calibrators. Vir A (declination +12 deg) is below CHORD's declination range
+# (down to +20 deg), so it is not included.
 CasA = source_dictionary["CAS_A"]
 CygA = source_dictionary["CYG_A"]
 TauA = source_dictionary["TAU_A"]
-VirA = source_dictionary["VIR_A"]

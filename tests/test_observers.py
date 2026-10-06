@@ -63,3 +63,11 @@ def test_reset():
     first = observers.all()
     observers.reset()
     assert observers.all() is not first
+
+
+def test_lsd_start():
+    from chord_ephem.observers import chord
+
+    # LSDs count from 2026-09-11
+    lsd = chord.unix_to_lsd(XENGINE_ERAL[0][0])  # 2026-09-11 23:29 UTC
+    assert 0 < lsd < 1.5

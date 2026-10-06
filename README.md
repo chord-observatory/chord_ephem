@@ -1,12 +1,10 @@
 # chord_ephem
 
-Ephemeris routines for CHORD, the counterpart of CHIME's
-[ch_ephem](https://github.com/chime-experiment/ch_ephem):
+This package provides ephemeris routines for CHORD.
 
 - `chord_ephem.observers`: `caput` `Observer`s for the CHORD instruments, with
   their positions in `chord_ephem/instruments.yaml`;
-- `chord_ephem.time`: conversions between UNIX time, UTC, local (DRAO) time,
-  local stellar angle / RA, LST and LSD, e.g. for the time axis of plots;
+- `chord_ephem.time`: conversions between UNIX time and local (DRAO) time;
 - `chord_ephem.sources`: the standard radio source catalogue.
 
 General-purpose ephemeris routines are in
@@ -16,10 +14,10 @@ holds what is specific to CHORD.
 
 ```python
 from chord_ephem.observers import chord
-from chord_ephem.time import time_axis
+from chord_ephem.time import unix_to_local_datetime
 
 lsa = chord.unix_to_lsa(unix_times)         # RA of the zenith (CIRS), degrees
-local, label = time_axis(unix_times, "local")  # e.g. for pcolormesh
+local = unix_to_local_datetime(unix_times)  # time zone aware datetimes
 ```
 
 ## Installation

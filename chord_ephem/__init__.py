@@ -16,9 +16,8 @@ file `instruments.yaml` provided with the package.
 Time
 ====
 
-:py:mod:`chord_ephem.time` converts UNIX times to the times used at CHORD: UTC,
-local (DRAO) time, the local stellar angle (the CIRS RA of the zenith), LST and
-LSD, for instance to label the time axis of a waterfall plot.
+:py:mod:`chord_ephem.time` converts between UNIX time and local (DRAO) time.
+Sidereal times are methods of the observers, e.g. `chord.unix_to_lsa`.
 
 Right Ascension
 ===============

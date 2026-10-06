@@ -17,7 +17,8 @@ returns a dict of Observer objects:
     {'chord': <chord_ephem.observers.Observer object at 0x7f2225b264d0>}
 
 The Observers subclass `caput.astro.observer.Observer` to also provide the
-local time zone, and the rotation and tangent-space offset of the array:
+local time zone, and the rotation and tangent-space offset of the array. The rotation,
+offset are just placeholders for now, but the timezone is used to convert between local time and UTC:
 
     >>> print(chord.timezone)
     America/Vancouver
@@ -42,9 +43,8 @@ from zoneinfo import ZoneInfo
 import yaml
 from caput.astro.observer import Observer as CaputObserver
 
-# LSD start time. This is the same as CHIME's, so that LSDs are the same for
-# both instruments.
-_lsd_start = datetime.datetime(2013, 11, 15)
+# LSD start time for CHORD - Sept 9, 2026
+_lsd_start = datetime.datetime(2026, 9, 11)
 
 # Initialised on first use
 _observers = None
