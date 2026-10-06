@@ -16,7 +16,7 @@ holds what is specific to CHORD.
 from chord_ephem.observers import chord
 from chord_ephem.time import unix_to_local_datetime
 
-lsa = chord.unix_to_lsa(unix_times)         # RA of the zenith (CIRS), degrees
+lsa = chord.unix_to_lsa(unix_times) # RA of the zenith (CIRS), degrees
 local = unix_to_local_datetime(unix_times)  # time zone aware datetimes
 ```
 
